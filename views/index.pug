@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  //- p Welcome to #{title}
+  //- each message in messages
+  //- p 
+      //- | #{message.user}: #{message.text} (#{message.added})
+  ul
+    //- The each loop to iterate over message_list and display each message with 
+    //- its user, text, and formatted date.
+    each message in message_list 
+      li 
+        strong= message.messageUser
+        //- Before luxon
+        //- | #{message.messageText} #{message.messageDate}
+        //- //after luxon
+        |: #{message.messageText} #{message.messageDate_formatted}
+  a.btn.btn-dark(href="/catalog/message/create" title="Click me to create New Message") Create New Message

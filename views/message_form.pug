@@ -1,0 +1,46 @@
+//- extends layout
+
+//- block content
+//-   h1= title
+//-   form(method="POST" action="/new")
+//-     label(for="messageUser") Author's Name:
+//-     input(type="text" name="messageUser" required)
+//-     br
+//-     label(for="messageText") Message Text:
+//-     input(type="text" name="messageText" required)
+//-     br
+//-     input(type="submit" value="Submit")
+
+extends layout
+
+block content
+  h1= title
+
+    //- action: The resource/URL where data is to be sent for processing when the form is submitted. 
+    //- If this is not set (or set to an empty string), then the form will be 
+    //- submitted back to the current page URL.
+    //- method: The HTTP method used to send the data: POST or GET.
+    //- The POST method should always be used if the data is going to result in a change to the 
+    //- server's database, because this can be made more resistant to cross-site forgery request attacks.
+    //- The GET method should only be used for forms that don't change user data (e.g. a search form). 
+    //- It is recommended for when you want to be able to bookmark or share the URL.
+  form(method="POST")
+    div.form-group 
+      label(for="messageUser") 
+        strong User Name:
+      input.form-control(type="text" name="messageUser" required='true' placeholder="Hanzalah" value=(undefined===message ? '' : message.messageUser))
+      br
+      label(for="messageText") 
+        strong Message:
+      textarea.form-control(name="messageText" required='true' placeholder="Write your message here" value=(undefined===message ? '' : message.messageText) cols="22" rows="4")
+      br
+      button.btn.btn-primary(type="submit" title="Click and submit ") Submit
+
+      if errors
+        ul
+          for error in errors
+            li!= error.msg  
+    a.btn.btn-secondary(href="/" title="Go to Home Page") Home Page
+  //- if newMessage
+  //-   p
+  //-     | #{newMessage.user}: #{newMessage.text} (#{newMessage.added})
